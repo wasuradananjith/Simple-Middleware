@@ -9,6 +9,8 @@ import java.util.concurrent.Executors;
 public class API {
 
 	public static void main(String[] args) {
+		
+		// Creates a thread pool with 50 threads executing tasks
 		ExecutorService consumerPool = Executors.newFixedThreadPool(50);
 		
 		ServerSocket server;

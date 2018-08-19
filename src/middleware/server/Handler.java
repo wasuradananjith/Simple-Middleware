@@ -20,7 +20,7 @@ public class Handler implements Runnable {
 	
 	public static String getSP(String val){
 		String SP = null;
-		SP = "SP_" + val.charAt(0);
+		SP = "ServiceProvider_" + val.charAt(7);
 		return SP;
 	}
 	
@@ -32,11 +32,11 @@ public class Handler implements Runnable {
 		HashMap <String, String> registry = new HashMap<String, String>();
 		
 		//Register Services
-		registry.put("a1", "getServerTime");
-		registry.put("a2", "greeting");
-		registry.put("b1", "getGender");
-		registry.put("b2", "getYear");
-		registry.put("b3", "getMonth");
+		registry.put("Service1_1", "getServerTime");
+		registry.put("Service1_2", "greeting");
+		registry.put("Service2_1", "getGender");
+		registry.put("Service2_2", "getYear");
+		registry.put("Service2_3", "getMonth");
 		
 		OutputStream out = null;
 		PrintWriter writer = null;
@@ -56,14 +56,6 @@ public class Handler implements Runnable {
 			
 			//present the registry
 			String formatedRegistry = null;
-			
-			formatedRegistry = "### Welcome to SP_a ###\nOur Services >>\n" +
-			"a1 - use this service to get our server time.\n"+
-			"a2 - use this service for greetings. {use your name as the parameter. eg:a2 Chamara}\n\n"+
-			"### Welcome to SP_b ###\nOur Services >>\n"+
-			"b1 - use this service to find the gender of a National Identity Card number. {use nic No. as the parameter. eg:b1 922280320v}\n"+
-			"b2 - use this service to find the birth year of a National Identity Card number. {use nic No. as the parameter. eg:b2 922280320v}\n"+
-			"b3 - use this service to find the birth month of a National Identity Card number. {use nic No. as the parameter. eg:b3 922280320v}\n";
 			
 			writer.write(registry+"\n");
 			writer.flush();
@@ -87,11 +79,12 @@ public class Handler implements Runnable {
 						System.out.println("## Server replied to the client@"+client.getRemoteSocketAddress()+"\n");
 						
 					}else{
-						Class<?> cls = Class.forName("com.som.services." + getSP(clientMsg));
+						Class<?> cls = Class.forName("middleware.services." + getSP(clientMsg));
 						Object obj = cls.newInstance();
 						
 						if(inParams.length != 1){
 							params = new Class[1];
+							System.out.println(params);
 							params[0] = String.class;
 												
 							Method method = cls.getDeclaredMethod(registry.get(inParams[0]), params);
