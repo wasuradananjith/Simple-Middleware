@@ -34,6 +34,7 @@ public class Handler implements Runnable {
 		//Register Services
 		registry.put("Service1_1", "getServerTime");
 		registry.put("Service1_2", "greeting");
+		registry.put("Service1_3", "gcd");
 		registry.put("Service2_1", "getGender");
 		registry.put("Service2_2", "getYear");
 		registry.put("Service2_3", "getMonth");
