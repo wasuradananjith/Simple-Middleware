@@ -11,12 +11,13 @@ public class ServiceProvider_1 {
 		return "Service Provider ServiceProvider_1's Current Date and time: " + ft.format(dNow);
 	}
 
-	public String greeting(String guest){
+	public String greeting(String guest, String n2){
+		System.out.println("g"+guest+" n-"+n2);
 		return "Welcome to ServiceProvider_1 "+guest;
 	}
 	
-	public String gcd(String num) {
-		int n1 = 81, n2 = 153, gcd = 1;
+	public int gcd(String num1, String num2) {
+		int n1 = Integer.parseInt(num1), n2 = Integer.parseInt(num2), gcd = 1;
 
         for(int i = 1; i <= n1 && i <= n2; ++i)
         {
@@ -25,6 +26,6 @@ public class ServiceProvider_1 {
                 gcd = i;
         }
         
-        return num;
+        return gcd;
 	}
 }
