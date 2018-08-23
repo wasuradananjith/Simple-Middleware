@@ -38,8 +38,8 @@ public class Handler implements Runnable {
 		registry.put("Service1_4", "div");
 		
 		registry.put("Service2_1", "gcd");
-		registry.put("Service2_2", "getYear");
-		registry.put("Service2_3", "getMonth");
+		registry.put("Service2_2", "isPrime");
+		registry.put("Service2_3", "fact");
 		
 		OutputStream out = null;
 		PrintWriter writer = null;
@@ -86,7 +86,16 @@ public class Handler implements Runnable {
 						Class<?> cls = Class.forName("middleware.services." + getSP(clientMsg));
 						Object obj = cls.newInstance();
 						
-						if(inParams.length != 1){
+						if(inParams.length == 2) {
+							params = new Class[1];
+							params[0] = String.class;
+												
+							Method method = cls.getDeclaredMethod(registry.get(inParams[0]), params);
+								writer.write(method.invoke(obj, new String(inParams[1])) + "\n");
+								writer.flush();
+								System.out.println("## Server replied to the client@"+client.getRemoteSocketAddress()+"\n");
+						}
+						else if(inParams.length != 2){
 							params = new Class[2];
 							params[0] = String.class;
 							params[1] = String.class;
@@ -96,7 +105,8 @@ public class Handler implements Runnable {
 								writer.write(method.invoke(obj, new String(inParams[1]), new String(inParams[2])) + "\n");
 								writer.flush();
 								System.out.println("## Server replied to the client@"+client.getRemoteSocketAddress()+"\n");
-						}else{
+						}
+						else{
 			
 							Method method = cls.getDeclaredMethod(registry.get(clientMsg), params);
 								writer.write(method.invoke(obj, null) + "\n");

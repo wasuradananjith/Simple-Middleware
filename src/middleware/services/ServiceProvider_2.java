@@ -57,4 +57,32 @@ public class ServiceProvider_2 {
          
          return gcd;
  	}
+ 	
+ 	// function to check whether a number is prime or not
+ 	public String isPrime(String num) {
+ 		int n = Integer.parseInt(num);
+		int count=0,i =1;
+		while (i<=n){
+			if(n%i==0){
+				count++;
+			}
+		i++;
+		}
+		if (count==2){
+			return "Prime";
+		}
+		else{
+			return "Not a Prime";
+		}
+ 	}
+ 	
+ 	// function to find the factorial of a number
+ 	public long fact(String num) {
+ 		 int i;  
+ 		  long number=Long.parseLong(num), fact = 1;
+ 		  for(i=1;i<=number;i++){    
+ 		      fact=fact*i;    
+ 		  }
+ 		  return fact;
+ 	}
 }
