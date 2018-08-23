@@ -20,8 +20,23 @@ public class Handler implements Runnable {
 	
 	public static String getSP(String val){
 		String SP = null;
-		SP = "ServiceProvider_" + val.charAt(7);
+		
+		if(val.equals("add") || val.equals("sub") || val.equals("mul") || val.equals("div"))
+		{
+			SP = "ServiceProvider_1";
+		}
+		
+		if(val.equals("gcd") || val.equals("isPrime") || val.equals("fact"))
+		{
+			SP = "ServiceProvider_2";
+		}
+		//SP = "ServiceProvider_" + val.charAt(7);
 		return SP;
+	}
+	
+	public static String extractMethodName(String methodName)
+	{
+		return methodName.substring(8);
 	}
 	
 	@Override
@@ -32,14 +47,14 @@ public class Handler implements Runnable {
 		HashMap <String, String> registry = new HashMap<String, String>();
 		
 		//Register Services
-		registry.put("Service1_1", "add");
-		registry.put("Service1_2", "sub");
-		registry.put("Service1_3", "mul");
-		registry.put("Service1_4", "div");
+		registry.put("Service_add", "add");
+		registry.put("Service_sub", "sub");
+		registry.put("Service_mul", "mul");
+		registry.put("Service_div", "div");
 		
-		registry.put("Service2_1", "gcd");
-		registry.put("Service2_2", "isPrime");
-		registry.put("Service2_3", "fact");
+		registry.put("Service_gcd", "gcd");
+		registry.put("Service_isPrime", "isPrime");
+		registry.put("Service_fact", "fact");
 		
 		OutputStream out = null;
 		PrintWriter writer = null;
@@ -76,6 +91,8 @@ public class Handler implements Runnable {
 					System.out.println("Client Msg - "+clientMsg);
 					System.out.println("inParams - "+inParams.length);
 					
+					String methodName = extractMethodName(inParams[0]);
+					
 					if(!registry.containsKey(inParams[0])){
 						System.out.println("Error Occured. No such service registered!");
 						writer.write(new String("Error Occured. No such service registered!")+"\n");
@@ -83,7 +100,7 @@ public class Handler implements Runnable {
 						System.out.println("## Server replied to the client@"+client.getRemoteSocketAddress()+"\n");
 						
 					}else{
-						Class<?> cls = Class.forName("middleware.services." + getSP(clientMsg));
+						Class<?> cls = Class.forName("middleware.services." + getSP(methodName));
 						Object obj = cls.newInstance();
 						
 						// handle function calls with 1 arguments
@@ -104,6 +121,8 @@ public class Handler implements Runnable {
 												
 							Method method = cls.getDeclaredMethod(registry.get(inParams[0]), params);
 							 System.out.println("method = " + method.toString());
+							 writer.write("flushed");
+							 writer.flush();
 								writer.write(method.invoke(obj, new String(inParams[1]), new String(inParams[2])) + "\n");
 								writer.flush();
 								System.out.println("## Server replied to the client@"+client.getRemoteSocketAddress()+"\n");
