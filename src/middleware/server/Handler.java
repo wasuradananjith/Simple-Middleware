@@ -71,7 +71,8 @@ public class Handler implements Runnable {
 					
 					String[] inParams = null;
 					inParams = clientMsg.split(" ");
-					
+					System.out.println("Client Msg - "+clientMsg);
+					System.out.println("inParams - "+inParams.length);
 					
 					if(!registry.containsKey(inParams[0])){
 						System.out.println("Error Occured. No such service registered!");
@@ -84,12 +85,13 @@ public class Handler implements Runnable {
 						Object obj = cls.newInstance();
 						
 						if(inParams.length != 1){
-							params = new Class[1];
-							System.out.println(params);
+							params = new Class[2];
 							params[0] = String.class;
+							params[1] = String.class;
 												
 							Method method = cls.getDeclaredMethod(registry.get(inParams[0]), params);
-								writer.write(method.invoke(obj, new String(inParams[1])) + "\n");
+							 System.out.println("method = " + method.toString());
+								writer.write(method.invoke(obj, new String(inParams[1]), new String(inParams[2])) + "\n");
 								writer.flush();
 								System.out.println("## Server replied to the client@"+client.getRemoteSocketAddress()+"\n");
 						}else{
@@ -107,6 +109,7 @@ public class Handler implements Runnable {
 			client.close();
 			
 		} catch (Throwable e) {
+			System.out.println(e);
 			System.out.println("Error Occured. No such service or incorrect parameters!");
 		}
 	}
