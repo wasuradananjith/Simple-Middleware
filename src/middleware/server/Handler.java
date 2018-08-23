@@ -86,6 +86,7 @@ public class Handler implements Runnable {
 						Class<?> cls = Class.forName("middleware.services." + getSP(clientMsg));
 						Object obj = cls.newInstance();
 						
+						// handle function calls with 1 arguments
 						if(inParams.length == 2) {
 							params = new Class[1];
 							params[0] = String.class;
@@ -95,7 +96,8 @@ public class Handler implements Runnable {
 								writer.flush();
 								System.out.println("## Server replied to the client@"+client.getRemoteSocketAddress()+"\n");
 						}
-						else if(inParams.length != 2){
+						// handle function calls with more than 1 argument
+						else if(inParams.length > 2){
 							params = new Class[2];
 							params[0] = String.class;
 							params[1] = String.class;
@@ -106,8 +108,8 @@ public class Handler implements Runnable {
 								writer.flush();
 								System.out.println("## Server replied to the client@"+client.getRemoteSocketAddress()+"\n");
 						}
+						// handle other function calls
 						else{
-			
 							Method method = cls.getDeclaredMethod(registry.get(clientMsg), params);
 								writer.write(method.invoke(obj, null) + "\n");
 								writer.flush();
