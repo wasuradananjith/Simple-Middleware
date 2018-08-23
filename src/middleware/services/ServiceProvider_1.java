@@ -16,16 +16,33 @@ public class ServiceProvider_1 {
 		return "Welcome to ServiceProvider_1 "+guest;
 	}
 	
-	public int gcd(String num1, String num2) {
-		int n1 = Integer.parseInt(num1), n2 = Integer.parseInt(num2), gcd = 1;
-
-        for(int i = 1; i <= n1 && i <= n2; ++i)
-        {
-            // Checks if i is factor of both integers
-            if(n1 % i==0 && n2 % i==0)
-                gcd = i;
-        }
-        
-        return gcd;
+	// function  to add to numbers (doubles)
+	public double add(String num1, String num2) {
+		double n1 = Double.parseDouble(num1), n2 = Double.parseDouble(num2), total;
+		total = n1 + n2;
+		return total;
 	}
+	
+	// function  to subtract first number(double) from second number(double)
+	public double sub(String num1, String num2) {
+		double n1 = Double.parseDouble(num1), n2 = Double.parseDouble(num2), diff;
+		diff = n1 - n2;
+		return diff;
+	}
+	
+	// function  to multiply to numbers (doubles)
+	public double mul(String num1, String num2) {
+		double n1 = Double.parseDouble(num1), n2 = Double.parseDouble(num2), product;
+		product = n1 * n2;
+		return product;
+	}	
+
+	// function  to divide first number(double) from the second number(double)
+	public double div(String num1, String num2) {
+		double n1 = Double.parseDouble(num1), n2 = Double.parseDouble(num2), division;
+		division = n1 / n2;
+		return division;
+	}
+	
+	
 }

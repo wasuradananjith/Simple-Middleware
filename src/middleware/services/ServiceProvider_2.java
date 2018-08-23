@@ -43,4 +43,46 @@ public class ServiceProvider_2 {
             return M;
         }
     }
+    
+ // function to find Greatest Common Deviser of 2 numbers 
+ 	public int gcd(String num1, String num2) {
+ 		int n1 = Integer.parseInt(num1), n2 = Integer.parseInt(num2), gcd = 1;
+
+         for(int i = 1; i <= n1 && i <= n2; ++i)
+         {
+             // Checks if i is factor of both integers
+             if(n1 % i==0 && n2 % i==0)
+                 gcd = i;
+         }
+         
+         return gcd;
+ 	}
+ 	
+ 	// function to check whether a number is prime or not
+ 	public String isPrime(String num) {
+ 		int n = Integer.parseInt(num);
+		int count=0,i =1;
+		while (i<=n){
+			if(n%i==0){
+				count++;
+			}
+		i++;
+		}
+		if (count==2){
+			return "Prime";
+		}
+		else{
+			return "Not a Prime";
+		}
+ 	}
+ 	
+ 	// function to find the factorial of a number
+ 	public long fact(String num) {
+ 		 int i;  
+ 		  long number=Long.parseLong(num), fact = 1;
+ 		  for(i=1;i<=number;i++){    
+ 		      fact=fact*i;    
+ 		  }
+ 		  return fact;
+ 	}
 }
