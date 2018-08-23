@@ -34,10 +34,12 @@ public class Consumer {
 
 				String formatedRegistry = null;
 				formatedRegistry = "### Welcome to ServiceProvider_1 ###\nOur Services >>\n" +
-						"Service1_1 - use this service to get our server time.\n"+
-						"Service1_2 - use this service for greetings. {use your name as the parameter. eg:Service1_2 Wasura}\n\n"+
+						"Service1_1 - use this service to add 2 numbers(doubles) {eg: Service1_1 100.5 5.1}\n"+
+						"Service1_2 - use this service to subtract first number(double) from the second number(duble) {eg: Service1_2 100.5 5.1}\n"+
+						"Service1_3 - use this service to multiply 2 numbers(doubles) {eg: Service1_3 100.5 5.1}\n"+
+						"Service1_4 - use this service to divide first number(double) from the second number(duble) {eg: Service1_4 100.5 5.1}\n\n"+
 						"### Welcome to ServiceProvider_2 ###\nOur Services >>\n"+
-						"Service2_1 - use this service to find the gender of a National Identity Card number. {use nic No. as the parameter. eg:Service2_1 922280320v}\n"+
+						"Service2_1 - use this service to find gcd f 2 numbers {eg: Service1_3 100 50}\n"+
 						"Service2_2 - use this service to find the birth year of a National Identity Card number. {use nic No. as the parameter. eg:Service2_2 922280320v}\n"+
 						"Service2_3 - use this service to find the birth month of a National Identity Card number. {use nic No. as the parameter. eg:Service2_3 922280320v}\n";
 				System.out.println(formatedRegistry);		
