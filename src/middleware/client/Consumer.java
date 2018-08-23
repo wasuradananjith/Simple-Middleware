@@ -34,14 +34,14 @@ public class Consumer {
 
 				String formatedRegistry = null;
 				formatedRegistry = "### Welcome to ServiceProvider_1 ###\nOur Services >>\n" +
-						"Service1_1 - use this service to add 2 numbers(doubles) {eg: Service1_1 100.5 5.1}\n"+
-						"Service1_2 - use this service to subtract first number(double) from the second number(duble) {eg: Service1_2 100.5 5.1}\n"+
-						"Service1_3 - use this service to multiply 2 numbers(doubles) {eg: Service1_3 100.5 5.1}\n"+
-						"Service1_4 - use this service to divide first number(double) from the second number(duble) {eg: Service1_4 100.5 5.1}\n\n"+
+						"Service_add - use this service to add 2 numbers(doubles) {eg: Service1_1 100.5 5.1}\n"+
+						"Service_sub - use this service to subtract first number(double) from the second number(duble) {eg: Service1_2 100.5 5.1}\n"+
+						"Service_mul - use this service to multiply 2 numbers(doubles) {eg: Service1_3 100.5 5.1}\n"+
+						"Service_div - use this service to divide first number(double) from the second number(duble) {eg: Service1_4 100.5 5.1}\n\n"+
 						"### Welcome to ServiceProvider_2 ###\nOur Services >>\n"+
-						"Service2_1 - use this service to find gcd of 2 numbers {eg: Service2_1 100 50}\n"+
-						"Service2_2 - use this service to find whether a number is prime or not. {eg:Service2_2 53}\n"+
-						"Service2_3 - use this service to find the factorial of a number. {eg:Service2_3 5}\n";
+						"Service_gcd - use this service to find gcd of 2 numbers {eg: Service2_1 100 50}\n"+
+						"Service_isPrime - use this service to find whether a number is prime or not. {eg:Service2_2 53}\n"+
+						"Service_fact - use this service to find the factorial of a number. {eg:Service2_3 5}\n";
 				System.out.println(formatedRegistry);		
 				
 				while (!destroyClient) {

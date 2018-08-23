@@ -11,7 +11,7 @@ public class API {
 	public static void main(String[] args) {
 		
 		// Creates a thread pool with 50 threads executing tasks
-		ExecutorService consumerPool = Executors.newFixedThreadPool(50);
+		ExecutorService consumerPool = Executors.newFixedThreadPool(100);
 		
 		ServerSocket server;
 		try {

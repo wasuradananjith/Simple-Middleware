@@ -121,8 +121,6 @@ public class Handler implements Runnable {
 												
 							Method method = cls.getDeclaredMethod(registry.get(inParams[0]), params);
 							 System.out.println("method = " + method.toString());
-							 writer.write("flushed");
-							 writer.flush();
 								writer.write(method.invoke(obj, new String(inParams[1]), new String(inParams[2])) + "\n");
 								writer.flush();
 								System.out.println("## Server replied to the client@"+client.getRemoteSocketAddress()+"\n");
