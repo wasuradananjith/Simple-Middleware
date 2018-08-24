@@ -38,10 +38,18 @@ public class ServiceProvider_1 {
 	}	
 
 	// function  to divide first number(double) from the second number(double)
-	public double div(String num1, String num2) {
-		double n1 = Double.parseDouble(num1), n2 = Double.parseDouble(num2), division;
-		division = n1 / n2;
-		return division;
+	public String div(String num1, String num2) {
+		float n1 = Float.parseFloat(num1), n2 = Float.parseFloat(num2), division;
+		if (n1 == 0 && n2 == 0) {
+			return "Undefined - No Meaning";
+		}
+		else if (n2 == 0) {
+			return "Sorry Division By Zero Is Not Possible\n";
+		}
+		else {
+			division = n1 / n2;
+			return Float.toString(division);
+		}
 	}
 	
 	
