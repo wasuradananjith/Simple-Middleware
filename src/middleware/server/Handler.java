@@ -16,6 +16,7 @@ public class Handler implements Runnable {
 	
 	public Handler(Socket client) {
 		this.client = client;
+		System.out.println("New Client Connected - Client_"+this.client.getPort()+"\n");
 	}
 	
 	public static String getSP(String val){
@@ -82,14 +83,13 @@ public class Handler implements Runnable {
 				clientMsg = reader.readLine();
 				if(clientMsg.equalsIgnoreCase("Q")){
 					destroyClient = true;
-					System.out.println("Client "+client.getRemoteSocketAddress()+" Connection Closed!\n");
+					System.out.println("Client_"+client.getPort()+" Connection Closed!\n");
 				}else{
-					System.out.println("## Server got a message from the client@"+client.getRemoteSocketAddress());
+					System.out.println("## Server got a message from the Client_"+client.getPort());
 					
 					String[] inParams = null;
 					inParams = clientMsg.split(" ");
-					System.out.println("Client Msg - "+clientMsg);
-					System.out.println("inParams - "+inParams.length);
+					System.out.println("Client_"+client.getPort()+" Message - "+clientMsg);
 					
 					String methodName = extractMethodName(inParams[0]);
 					
@@ -97,7 +97,7 @@ public class Handler implements Runnable {
 						System.out.println("Error Occured. No such service registered!");
 						writer.write(new String("Error Occured. No such service registered!")+"\n");
 						writer.flush();
-						System.out.println("## Server replied to the client@"+client.getRemoteSocketAddress()+"\n");
+						System.out.println("## Server replied to the Client_"+client.getPort()+"\n");
 						
 					}else{
 						Class<?> cls = Class.forName("middleware.services." + getSP(methodName));
@@ -109,9 +109,10 @@ public class Handler implements Runnable {
 							params[0] = String.class;
 												
 							Method method = cls.getDeclaredMethod(registry.get(inParams[0]), params);
+							System.out.println("Executing " + method.toString());
 								writer.write(method.invoke(obj, new String(inParams[1])) + "\n");
 								writer.flush();
-								System.out.println("## Server replied to the client@"+client.getRemoteSocketAddress()+"\n");
+								System.out.println("## Server replied to the Client_"+client.getPort()+"\n");
 						}
 						// handle function calls with more than 1 argument
 						else if(inParams.length > 2){
@@ -120,17 +121,18 @@ public class Handler implements Runnable {
 							params[1] = String.class;
 												
 							Method method = cls.getDeclaredMethod(registry.get(inParams[0]), params);
-							 System.out.println("method = " + method.toString());
+							 System.out.println("Executing " + method.toString());
 								writer.write(method.invoke(obj, new String(inParams[1]), new String(inParams[2])) + "\n");
 								writer.flush();
-								System.out.println("## Server replied to the client@"+client.getRemoteSocketAddress()+"\n");
+								System.out.println("## Server replied to the Client_"+client.getPort()+"\n");
 						}
 						// handle other function calls
 						else{
 							Method method = cls.getDeclaredMethod(registry.get(clientMsg), params);
+							System.out.println("Executing " + method.toString());
 								writer.write(method.invoke(obj, null) + "\n");
 								writer.flush();
-								System.out.println("## Server replied to the client@"+client.getRemoteSocketAddress()+"\n");
+								System.out.println("## Server replied to the Client_"+client.getPort()+"\n");
 						}
 					}
 				}		
