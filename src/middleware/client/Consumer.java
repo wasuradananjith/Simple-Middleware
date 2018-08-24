@@ -33,26 +33,30 @@ public class Consumer {
 				System.out.println(serviceLookup);
 
 				String formatedRegistry = null;
-				formatedRegistry = "### Welcome to ServiceProvider_1 ###\nOur Services >>\n" +
-						"Service_add - use this service to add 2 numbers(doubles) {eg: Service1_1 100.5 5.1}\n"+
-						"Service_sub - use this service to subtract first number(double) from the second number(duble) {eg: Service1_2 100.5 5.1}\n"+
-						"Service_mul - use this service to multiply 2 numbers(doubles) {eg: Service1_3 100.5 5.1}\n"+
-						"Service_div - use this service to divide first number(double) from the second number(duble) {eg: Service1_4 100.5 5.1}\n\n"+
-						"### Welcome to ServiceProvider_2 ###\nOur Services >>\n"+
-						"Service_gcd - use this service to find gcd of 2 numbers {eg: Service2_1 100 50}\n"+
-						"Service_isPrime - use this service to find whether a number is prime or not. {eg:Service2_2 53}\n"+
-						"Service_fact - use this service to find the factorial of a number. {eg:Service2_3 5}\n";
+				formatedRegistry = "\n*** Welcome to CalculatorPro ***\n<<Our Services >>\n\n" +
+						"1.Service_add     - use this service to add 2 numbers(doubles) {eg: Service_add 100.5 5.1}\n"+
+						"2.Service_sub     - use this service to subtract first number(double) from the second number(double) {eg: Service_sub 100.5 5.1}\n"+
+						"3.Service_mul     - use this service to multiply 2 numbers(doubles) {eg: Service_mul 100.5 5.1}\n"+
+						"4.Service_div     - use this service to divide first number(double) from the second number(double) {eg: Service_div 100.5 5.1}\n"+
+						"5.Service_gcd     - use this service to find gcd of 2 numbers {eg: Service_gcd 100 50}\n"+
+						"6.Service_isPrime - use this service to find whether a number is prime or not. {eg:Service_isPrime 53}\n"+
+						"7.Service_fact    - use this service to find the factorial of a number. {eg:Service_fact 5}\n"+
+						"8.Q			   - use this command to exit";
 				System.out.println(formatedRegistry);		
 				
 				while (!destroyClient) {
 					String serverResp = null;
 					Boolean serverRecieved = false;
 					
-					System.out.println("\n[client@"+server.getLocalSocketAddress()+" ~]$ ");
+					//System.out.println("\n[client@"+server.getLocalSocketAddress()+" ~]$ ");
+					System.out.println("\n[Client_"+server.getPort()+"]"+" Enter Command -> ");
 					String clientInput = input.nextLine();
 					
 					if(clientInput.equalsIgnoreCase("Q")){
+						writer.write(clientInput + "\n");
+						writer.flush();
 						destroyClient = true;
+						System.out.println("Connection Closed");
 					}else{
 						
 						writer.write(clientInput + "\n");
