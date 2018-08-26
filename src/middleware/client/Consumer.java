@@ -58,14 +58,14 @@ public class Consumer {
 						destroyClient = true;
 						System.out.println("Connection Closed");
 					}else{
-						
+						System.out.println(122);
 						writer.write(clientInput + "\n");
 						writer.flush();
 						System.out.println("\n## Sent a message to server.");
 	
 						serverResp = reader.readLine();
-						System.out.println("## Got Reply from server.\n");
-						System.out.println("From server: " + serverResp + "\n");
+						System.out.println("## Got Reply from server");
+						System.out.println("From server: " + serverResp);
 					}
 				}
 				input.close();
@@ -73,10 +73,16 @@ public class Consumer {
 				writer.close();
 				server.close();
 			} catch (UnknownHostException e) {
-				e.printStackTrace();
+				//e.printStackTrace();
+				System.out.println("here");
 			} catch (IOException e) {
-				e.printStackTrace();
+				//e.printStackTrace();
+				System.out.println("Here2");
+			}  catch (Exception e) {
+				//e.printStackTrace();
+				System.out.println("Here3");
 			} 
+			
 	}
 }
 
