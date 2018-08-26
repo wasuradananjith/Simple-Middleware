@@ -102,12 +102,10 @@ public class Handler implements Runnable {
 					}else{
 						Class<?> cls = Class.forName("middleware.services." + getSP(methodName));
 						Object obj = cls.newInstance();
-						
 						// handle function calls with 1 arguments
 						if(inParams.length == 2) {
 							params = new Class[1];
 							params[0] = String.class;
-												
 							Method method = cls.getDeclaredMethod(registry.get(inParams[0]), params);
 							System.out.println("Executing " + method.toString());
 								writer.write(method.invoke(obj, new String(inParams[1])) + "\n");
@@ -118,8 +116,7 @@ public class Handler implements Runnable {
 						else if(inParams.length > 2){
 							params = new Class[2];
 							params[0] = String.class;
-							params[1] = String.class;
-												
+							params[1] = String.class;				
 							Method method = cls.getDeclaredMethod(registry.get(inParams[0]), params);
 							 System.out.println("Executing " + method.toString());
 								writer.write(method.invoke(obj, new String(inParams[1]), new String(inParams[2])) + "\n");
@@ -140,10 +137,12 @@ public class Handler implements Runnable {
 			writer.close();
 			reader.close();
 			client.close();
-			
 		} catch (Throwable e) {
-			System.out.println(e);
+			//System.out.println(e);
+			writer.write(new String("Error Occured. No such service or incorrect parameters!\n"));
+			writer.flush();
 			System.out.println("Error Occured. No such service or incorrect parameters!");
+			System.out.println("## Server replied to the Client_"+client.getPort()+"\n");
 		}
 	}
 }
